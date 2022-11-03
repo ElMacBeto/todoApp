@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="task"
+            type="com.practica.todoapp.data.datasource.database.entity.TaskEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.activity.notification.MyNotificationActivity">
+
+        <LinearLayout
+            android:id="@+id/tool_bar_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_back_arrow"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:background="@android:color/transparent"
+                android:foreground="@drawable/foreground_item"
+                android:src="@drawable/ic_arrow" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="Notificacion"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/message_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:text="@{@string/notification_message(task.name, task.date, task.time)}"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_posponer" />
+
+        <TextView
+            android:id="@+id/tv_posponer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="150sp"
+            android:text="Posponer"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar_top" />
+
+        <Button
+            android:id="@+id/aceptar_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="posponer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_posponer"
+            android:layout_margin="10sp"
+            style="@style/MyOutlineButton" />
+
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            style="@style/MyOutlineButton"
+            android:text="no posponer"
+            android:backgroundTint="@color/blue_dark"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/aceptar_btn" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

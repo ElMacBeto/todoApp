@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/calendar"
+        android:title=""
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"
+        android:contentDescription=""
+        android:iconTint="@color/white"
+        app:itemIconSize="50dp">
+    </item>
+
+
+
+    <item android:id="@+id/home"
+        android:title=""
+        android:icon="@drawable/ic_calendar"
+        app:showAsAction="ifRoom"
+        android:contentDescription=""
+        android:iconTint="@color/white"
+        app:itemIconSize="50dp">
+    </item>
+
+</menu>

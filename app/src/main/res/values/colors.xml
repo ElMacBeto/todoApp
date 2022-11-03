@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#B8B8B8</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#B3E40000</color>
+    <color name="green">#11A31F</color>
+
+    <!--theme colors    -->
+    <color name="primary">#004C80</color>
+    <color name="secundary">#4992C3</color>
+    <color name="tertiary">#8CACC1</color>
+    <color name="background">#252525</color>
+    <!-- item task background   -->
+    <color name="bg_main">#ECECEC</color>
+    <color name="myForeground">#B8B8B8</color>
+    <color name="grey">#686868</color>
+
+    <!--items type    -->
+    <color name="job">#363636</color>
+    <color name="family">#2196F3</color>
+    <color name="home_task">#FFC107</color>
+    <color name="sport">#4CAF50</color>
+    <color name="hobby">#D330AF</color>
+    <color name="handout">#FF6F00</color>
+
+    <!--image done    -->
+    <color name="blue_light">#A6B7D7F1</color>
+    <color name="blue_dark">#42A6F6</color>
+</resources>

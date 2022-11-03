@@ -1,0 +1,76 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TodoApp" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextAppearance.App.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="fab_square" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">90dp</item>
+    </style>
+
+    <style name="MyLayoutInputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="boxStrokeColor">@color/secundary</item>
+        <item name="boxStrokeWidthFocused">3sp</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="strokeColor">@color/tertiary</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">10sp</item>
+    </style>
+
+    <style name="my_dialog_theme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/white</item>                   <!--header background-->
+        <item name="android:windowBackground">@color/primary</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/secundary</item> <!--selected day-->
+        <item name="android:textColorPrimary">@color/grey</item> <!--days of the month-->
+        <item name="android:textColorSecondary">@color/secundary</item>    <!--days of the week-->
+        <item name="colorPrimary">@color/secundary</item>
+    </style>
+
+    <style name="my_dialog_time_theme" parent="@android:style/Theme.Holo.Dialog">
+        <item name="colorAccent">@color/white</item>                   <!--header background-->
+        <item name="android:windowBackground">@android:color/transparent</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/secundary</item> <!--selected day-->
+        <item name="android:textColorPrimary">@color/grey</item> <!--days of the month-->
+        <item name="android:textColorSecondary">@color/secundary</item>    <!--days of the week-->
+        <item name="colorPrimary">@color/secundary</item>
+    </style>
+
+    <style name="MyMaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+    </style>
+
+    <style name="MyOutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/blue_dark</item>
+        <item name="strokeWidth">3sp</item>
+        <item name="android:foreground">@drawable/foreground_item</item>
+        <item name="android:padding">10sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blue_dark</item>
+    </style>
+
+</resources>
