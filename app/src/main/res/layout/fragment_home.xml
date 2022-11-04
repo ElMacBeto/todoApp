@@ -16,8 +16,8 @@
         android:padding="10sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="50sp" />
-
+         />
+<!--    android:layout_marginBottom="50sp"-->
 
 
 

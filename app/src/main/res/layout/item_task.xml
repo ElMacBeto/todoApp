@@ -1,150 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/motion_container"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:background="@android:color/transparent"
-    app:layoutDescription="@xml/item_task_scene">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/item_container"
+    <data>
+        <variable
+            name="task"
+            type="com.practica.todoapp.data.datasource.database.entity.TaskEntity" />
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion_container"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="5sp"
-        android:elevation="20sp"
-        android:layout_marginVertical="10sp"
-        android:outlineAmbientShadowColor="@color/job"
-        android:clickable="true"
-        android:foreground="@drawable/foreground_item">
+        android:layout_height="wrap_content"
+        tools:background="@android:color/transparent"
+        app:layoutDescription="@xml/item_task_scene">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent">
+            android:layout_height="100sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="5sp"
+            android:elevation="0sp"
+            android:layout_marginVertical="10sp"
+            android:outlineAmbientShadowColor="@color/job"
+            android:clickable="true"
+            android:foreground="@drawable/foreground_item">
 
-            <LinearLayout
-                android:id="@+id/item_type"
-                android:layout_width="10sp"
-                android:layout_height="0sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:background="@color/job"
-                android:orientation="horizontal" >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:id="@+id/item_type"
+                    android:layout_width="10sp"
+                    android:layout_height="0sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:background="@color/job"
+                    android:orientation="horizontal" />
 
                 <TextView
+                    android:id="@+id/item_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:rotation="-90"
-                    android:gravity="fill_vertical"
-                    android:background="@color/job"/>
+                    android:layout_height="wrap_content"
+                    android:text="@{task.time}"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/item_description"
+                    app:layout_constraintLeft_toRightOf="@+id/item_type"
+                    android:layout_marginStart="10sp" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@+id/item_time"
+                    app:layout_constraintBottom_toBottomOf="@id/item_time"
+                    app:layout_constraintLeft_toRightOf="@+id/item_time"
+                    android:lines="1"
+                    android:text="@{task.name}"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="10sp"/>
 
-            <TextView
-                android:id="@+id/item_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="9:45"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/item_title"
-                app:layout_constraintLeft_toRightOf="@+id/item_type"
-                android:layout_marginStart="10sp" />
+                <TextView
+                    android:id="@+id/item_description"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.description}"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey"
+                    android:layout_marginVertical="5sp"
+                    app:layout_constraintTop_toBottomOf="@+id/item_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/item_time"
+                    app:layout_constraintRight_toLeftOf="@id/fab_menu"
+                    android:lines="1"/>
 
-            <TextView
-                android:id="@+id/item_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="title task"
-                android:textSize="16sp"
-                android:textColor="@color/grey"
-                android:layout_marginVertical="5sp"
-                app:layout_constraintTop_toBottomOf="@+id/item_time"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/item_time"/>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="25sp"
+                    android:backgroundTint="@color/white"
+                    app:borderWidth="15sp"
+                    app:backgroundTint="@color/blue_dark"
+                    app:shapeAppearanceOverlay="@style/fab_shape"
+                    app:tint="@color/red"
+                    android:contentDescription="TODO" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="100sp"
+            android:elevation="10sp"
+            android:layout_marginEnd="50sp"
+            android:visibility="gone"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_menu"
+                android:id="@+id/fab_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_task"
+                app:srcCompat="@drawable/ic_done"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="25sp"
-                android:backgroundTint="@color/primary"
-                app:shapeAppearanceOverlay="@style/fab_square"
-                app:tint="@color/white"
-                android:contentDescription="TODO" />
+                android:layout_marginBottom="80sp"
+                android:layout_marginRight="60sp"
+                app:fabSize="mini"
+                android:backgroundTint="@color/white"
+                app:tint="@color/black"
+                app:shapeAppearanceOverlay="@style/fab_square" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_delete"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="-80sp"
+                android:layout_marginRight="60sp"
+                app:fabSize="mini"
+                android:backgroundTint="@color/white"
+                app:tint="@color/black"
+                app:shapeAppearanceOverlay="@style/fab_square" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_edit"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="85sp"
+                app:fabSize="mini"
+                android:backgroundTint="@color/white"
+                app:tint="@color/black"
+                app:shapeAppearanceOverlay="@style/fab_square" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/menu_btns"
-        android:layout_width="wrap_content"
-        android:layout_height="100sp"
-        android:elevation="10sp"
-        android:layout_marginEnd="50sp"
-        android:visibility="gone"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_done"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="80sp"
-            android:layout_marginRight="60sp"
-            app:fabSize="mini"
-            android:backgroundTint="@color/white"
-            app:tint="@color/black"
-            app:shapeAppearanceOverlay="@style/fab_square"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_delete"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="-80sp"
-            android:layout_marginRight="60sp"
-            app:fabSize="mini"
-            android:backgroundTint="@color/white"
-            app:tint="@color/black"
-            app:shapeAppearanceOverlay="@style/fab_square"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_edit"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginRight="85sp"
-            app:fabSize="mini"
-            android:backgroundTint="@color/white"
-            app:tint="@color/black"
-            app:shapeAppearanceOverlay="@style/fab_square"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

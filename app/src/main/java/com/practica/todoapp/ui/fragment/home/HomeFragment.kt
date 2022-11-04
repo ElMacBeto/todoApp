@@ -2,22 +2,29 @@ package com.practica.todoapp.ui.fragment.home
 
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.practica.todoapp.R
 import com.practica.todoapp.data.datasource.database.entity.*
 import com.practica.todoapp.databinding.FragmentHomeBinding
 import com.practica.todoapp.ui.dialog.addtask.ModalBottomSheet
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class HomeFragment : Fragment() {
@@ -25,14 +32,21 @@ class HomeFragment : Fragment() {
     private lateinit var _binding: FragmentHomeBinding
     private val binding get() = _binding
     private val viewModel: HomeViewModel by viewModels()
-
     private lateinit var adapter: TaskAdapter
+    private lateinit var fabAdd: ExtendedFloatingActionButton
+    private lateinit var rightArrowBtn: ImageButton
+    private lateinit var leftArrowBtn: ImageButton
+    private lateinit var currentDateTv:TextView
     private var taskList = mutableListOf<TaskEntity>()
-    private lateinit var fabAdd: FloatingActionButton
-
+    private var offsetValue:Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        fabAdd = requireActivity().findViewById(R.id.fab_add)
+        currentDateTv = requireActivity().findViewById(R.id.current_date)
+        leftArrowBtn = requireActivity().findViewById(R.id.left_arrow_btn)
+        rightArrowBtn = requireActivity().findViewById(R.id.right_arrow_btn)
 
         requireActivity().findViewById<SearchView>(R.id.search)
             .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -55,7 +69,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fabAdd = requireActivity().findViewById(R.id.fab_add)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -66,8 +79,11 @@ class HomeFragment : Fragment() {
         setObserver()
         initAdapter()
         setListener()
-//        swipeFunction()
-        viewModel.getTaskList()
+        swipeFunction()
+        Handler(Looper.getMainLooper()).postDelayed({
+            viewModel.getTaskList()
+        }, 1000)
+
     }
 
     private fun setObserver() {
@@ -96,9 +112,9 @@ class HomeFragment : Fragment() {
     private fun initAdapter() {
         adapter = TaskAdapter()
         adapter.notifyDataSetChanged()
-        adapter.onDeleteItem = { task, item ->
-            viewModel.deleteTask(parentFragmentManager, task, item)
-        }
+//        adapter.onDeleteItem = { task, item ->
+//            viewModel.deleteTask(parentFragmentManager, task, item)
+//        }
         adapter.onDoneItem = {
             viewModel.setDoneTask(parentFragmentManager, it)
         }
@@ -116,6 +132,25 @@ class HomeFragment : Fragment() {
             val modalBottomSheet = ModalBottomSheet(null) { viewModel.getTaskList() }
             modalBottomSheet.show(parentFragmentManager, ModalBottomSheet.TAG)
         }
+
+        binding.rvTask.addOnScrollListener(object:RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if(dy>0){
+                    fabAdd.shrink()
+                }else{
+                    fabAdd.extend()
+                }
+            }
+        })
+
+        rightArrowBtn.setOnClickListener {
+            offsetValue += 1
+            setTvDate()
+        }
+        leftArrowBtn.setOnClickListener {
+            offsetValue -= 1
+            setTvDate()
+        }
     }
 
     private fun swipeFunction() {
@@ -131,30 +166,22 @@ class HomeFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
                 val deletedTask: TaskEntity =
                     taskList[viewHolder.adapterPosition]
 
                 val position = viewHolder.adapterPosition
-
+                viewModel.newDeleteTask(deletedTask)
                 taskList.removeAt(viewHolder.adapterPosition)
-
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
 
                 Snackbar.make(binding.rvTask, "Deleted " + deletedTask.name, Snackbar.LENGTH_LONG)
                     .setAction(
                         "ok"
                     ) {
-
                         taskList.add(position, deletedTask)
-
-                        // below line is to notify item is
-                        // added to our adapter class.
                         adapter.notifyItemInserted(position)
                     }.show()
             }
-            // at last we are adding this
-            // to our recycler view.
         }).attachToRecyclerView(binding.rvTask)
     }
 
@@ -167,5 +194,15 @@ class HomeFragment : Fragment() {
             }.show()
 
     }
+
+    private fun setTvDate() {
+        val ldt: LocalDateTime = LocalDateTime.now().plusDays(offsetValue)
+        val sdf =  DateTimeFormatter.ofPattern("EEE, MMM d, ''yy")
+        val currentDate = sdf.format(ldt)
+        Log.i("date", currentDate)
+        currentDateTv.text = currentDate
+    }
+
+
 
 }

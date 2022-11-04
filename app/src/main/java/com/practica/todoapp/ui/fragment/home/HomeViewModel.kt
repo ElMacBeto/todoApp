@@ -61,10 +61,10 @@ class HomeViewModel : ViewModel() {
         val title = context.resources.getString(R.string.delete_title)
 
         val alert = DeleteDialog(message, title) {
-            deleteTaskUseCase(task, item){
-                messaje.postValue("task deleted")
-                updateList.postValue(true)
-            }
+//            deleteTaskUseCase(task, item){
+//                messaje.postValue("task deleted")
+//                updateList.postValue(true)
+//            }
         }
         alert.show(fragmentManager, DeleteDialog.TAG)
     }
@@ -80,7 +80,7 @@ class HomeViewModel : ViewModel() {
         val alert = ConfirmDialog {
             viewModelScope.launch {
                 task.status = TAST_STATUS_DONE
-                addTaskUseCase(task, true) {_,_->
+                addTaskUseCase(task, true) { _, _ ->
                     messaje.postValue("task done")
                     updateList.postValue(true)
                 }
@@ -96,6 +96,14 @@ class HomeViewModel : ViewModel() {
                 addSource(currentList) {
                     value = it
                 }
+            }
+        }
+    }
+
+    fun newDeleteTask( task: TaskEntity) {
+        viewModelScope.launch {
+            deleteTaskUseCase(task) {
+//                messaje.postValue("task deleted")
             }
         }
     }

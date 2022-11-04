@@ -29,13 +29,15 @@ class DeleteTaskUseCase {
         DaggerRepositoryComponent.builder().build().inject(this)
     }
 
-
-     operator fun invoke(task:TaskEntity, item: View, function:()->Unit){
-        animateHeight(item, item.height, task, function)
+    //    operator fun invoke(task:TaskEntity, item: View, function:()->Unit){
+    suspend operator fun invoke(task: TaskEntity, function: () -> Unit) {
+        repository.deleteTask(task)
+        function()
+//        animateHeight(item, item.height, task, function)
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private fun animateHeight(v: View, height: Int, task:TaskEntity, function:()->Unit) {
+    private fun animateHeight(v: View, height: Int, task: TaskEntity, function: () -> Unit) {
         val initialHeight = v.measuredHeight
         val duration = 400
         val interpolator: Interpolator = AccelerateInterpolator(2F)
@@ -61,7 +63,7 @@ class DeleteTaskUseCase {
         }
         a.duration = duration.toLong()
         a.interpolator = interpolator
-        a.setAnimationListener(object: Animation.AnimationListener{
+        a.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {}
 
             override fun onAnimationEnd(p0: Animation?) {
@@ -71,7 +73,7 @@ class DeleteTaskUseCase {
                 }
             }
 
-            override fun onAnimationRepeat(p0: Animation?) { }
+            override fun onAnimationRepeat(p0: Animation?) {}
         })
         v.startAnimation(a)
     }

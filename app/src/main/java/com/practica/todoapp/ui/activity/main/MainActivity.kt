@@ -1,17 +1,19 @@
 package com.practica.todoapp.ui.activity.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.practica.todoapp.R
 import com.practica.todoapp.databinding.ActivityMainBinding
 import com.practica.todoapp.ui.fragment.home.HomeFragment
-import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var offsetValue:Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +25,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTvDate() {
-        val sdf = SimpleDateFormat("EEE, MMM d, ''yy")
-        val currentDate = sdf.format(Date())
-        Log.i("date",currentDate)
-        binding.currentDate.text=currentDate
+        val ldt: LocalDateTime = LocalDateTime.now().plusDays(offsetValue)
+        val sdf =  DateTimeFormatter.ofPattern("EEE, MMM d, ''yy")
+        val currentDate = sdf.format(ldt)
+        Log.i("date", currentDate)
+        binding.currentDate.text = currentDate
     }
 
     private fun setContainer() {
@@ -35,6 +38,5 @@ class MainActivity : AppCompatActivity() {
         transition.replace(R.id.container, fragment)
         transition.commit()
     }
-
 
 }
