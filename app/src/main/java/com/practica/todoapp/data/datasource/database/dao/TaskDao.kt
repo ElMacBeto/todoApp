@@ -7,8 +7,8 @@ import com.practica.todoapp.data.datasource.database.entity.TaskEntity
 @Dao
 interface TaskDao {
 
-    @Query("SELECT * FROM task_table ORDER BY date, time, status COLLATE NOCASE ASC")
-     fun getAll(): LiveData<List<TaskEntity>>
+    @Query("SELECT * FROM task_table WHERE date = :date AND status in (0,1) ORDER BY date, time, status COLLATE NOCASE ASC")
+    suspend fun getAll(date:String): List<TaskEntity>
 
     @Query("SELECT * FROM task_table WHERE id IN (:tastkId)")
     suspend fun getById(tastkId: Int): TaskEntity

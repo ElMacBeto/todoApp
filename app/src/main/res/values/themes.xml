@@ -40,8 +40,18 @@
 
     <style name="MyLayoutInputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@android:color/transparent</item>
-        <item name="hintTextColor">@color/primary</item>
-        <item name="boxStrokeColor">@color/secundary</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeWidthFocused">3sp</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="strokeColor">@color/tertiary</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">10sp</item>
+    </style>
+
+    <style name="MyLayoutAutocompleteText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxStrokeColor">@color/white</item>
         <item name="boxStrokeWidthFocused">3sp</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="strokeColor">@color/tertiary</item>
@@ -52,7 +62,7 @@
         <item name="colorAccent">@color/white</item>                   <!--header background-->
         <item name="android:windowBackground">@color/primary</item>     <!--calendar background-->
         <item name="android:colorControlActivated">@color/secundary</item> <!--selected day-->
-        <item name="android:textColorPrimary">@color/grey</item> <!--days of the month-->
+        <item name="android:textColorPrimary">@color/white</item> <!--days of the month-->
         <item name="android:textColorSecondary">@color/secundary</item>    <!--days of the week-->
         <item name="colorPrimary">@color/secundary</item>
     </style>
@@ -82,5 +92,6 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/blue_dark</item>
     </style>
+
 
 </resources>

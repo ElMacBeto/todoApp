@@ -19,7 +19,7 @@ class AddOrUpdateTaskUseCase {
     suspend operator fun invoke(
         task: TaskEntity,
         editFlag: Boolean=false,
-        function: (error: ErrorTaskMessage, id: Int) -> Unit
+        function: (error: ErrorTaskMessage, id: Int) -> Unit?
     ) {
 
         val errorMessage = ErrorTaskMessage()
@@ -50,8 +50,7 @@ class AddOrUpdateTaskUseCase {
         }
 
         if (!errorMessage.status) {
-            var taskId = 0
-            taskId = if (editFlag)
+            val taskId = if (editFlag)
                 repository.updateTask(task)
             else {
                 repository.saveTask(task).toInt()
