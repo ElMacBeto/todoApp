@@ -1,7 +1,9 @@
 package com.practica.todoapp.ui.activity.main
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.practica.todoapp.R
 import com.practica.todoapp.databinding.ActivityMainBinding
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var offsetValue:Long = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setTvDate()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setTvDate() {
         val ldt: LocalDateTime = LocalDateTime.now().plusDays(offsetValue)
         val sdf =  DateTimeFormatter.ofPattern("EEE, MMM d, ''yy")

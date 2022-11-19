@@ -39,9 +39,21 @@
 
 
     <style name="MyLayoutInputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="colorPrimary">@color/white</item>
         <item name="boxBackgroundColor">@android:color/transparent</item>
-        <item name="hintTextColor">@color/primary</item>
-        <item name="boxStrokeColor">@color/secundary</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxStrokeColor">@color/selector_text_oultine</item>
+        <item name="boxStrokeWidthFocused">2sp</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:strokeColor">@color/tertiary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">10sp</item>
+    </style>
+
+    <style name="MyLayoutAutocompleteText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxStrokeColor">@color/selector_text_oultine</item>
         <item name="boxStrokeWidthFocused">3sp</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="strokeColor">@color/tertiary</item>
@@ -52,7 +64,7 @@
         <item name="colorAccent">@color/white</item>                   <!--header background-->
         <item name="android:windowBackground">@color/primary</item>     <!--calendar background-->
         <item name="android:colorControlActivated">@color/secundary</item> <!--selected day-->
-        <item name="android:textColorPrimary">@color/grey</item> <!--days of the month-->
+        <item name="android:textColorPrimary">@color/white</item> <!--days of the month-->
         <item name="android:textColorSecondary">@color/secundary</item>    <!--days of the week-->
         <item name="colorPrimary">@color/secundary</item>
     </style>
@@ -82,5 +94,25 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/blue_dark</item>
     </style>
+
+    <style name="BottomSheetDialog_Rounded" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheet_Rounded</item>
+
+        <item name="android:statusBarColor">@color/family</item>
+        <item name="colorPrimary">@color/family</item>
+    </style>
+
+    <style name="BottomSheet_Rounded" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceBottomSheetDialog_Rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceBottomSheetDialog_Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
 
 </resources>

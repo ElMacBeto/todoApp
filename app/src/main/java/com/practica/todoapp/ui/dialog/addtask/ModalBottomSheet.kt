@@ -28,9 +28,13 @@ class ModalBottomSheet(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = BottomSheetMenuBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun getTheme(): Int {
+        return R.style.BottomSheetDialog_Rounded
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

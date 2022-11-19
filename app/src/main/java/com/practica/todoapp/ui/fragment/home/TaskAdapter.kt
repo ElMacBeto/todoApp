@@ -17,7 +17,6 @@ class TaskAdapter :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     var taskList = mutableListOf<TaskEntity>()
-    var onDeleteItem: ((TaskEntity, View) -> Unit)? = null
     var onEditItem: ((TaskEntity) -> Unit)? = null
     var onDoneItem: ((TaskEntity) -> Unit)? = null
     var onInfoItem: ((TaskEntity) -> Unit)? = null
@@ -30,6 +29,9 @@ class TaskAdapter :
         fun setView(task: TaskEntity) {
             itemView.visibility = View.VISIBLE
             itemView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            val param = itemView.layoutParams as ViewGroup.MarginLayoutParams
+            param.setMargins(0,0,0,0)
+            itemView.layoutParams = param
 
             with(binding) {
                 binding.task = task
@@ -91,15 +93,17 @@ class TaskAdapter :
             }
 
             if (status == TAST_STATUS_DONE) {
-//                binding.itemType.setBackgroundColor(itemView.context.getColor(R.color.grey))
-
-//                binding.fabMenu.imageTintList =
-//                    ColorStateList.valueOf(itemView.context.getColor(R.color.grey))
                 binding.itemTime.paintFlags = binding.itemTime.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 binding.itemDescription.paintFlags = binding.itemDescription.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 binding.itemName.paintFlags = binding.itemName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
 
+        }
+
+        fun setLastMargin() {
+            val param = itemView.layoutParams as ViewGroup.MarginLayoutParams
+            param.setMargins(0,0,0,130)
+            itemView.layoutParams = param
         }
     }
 
@@ -118,8 +122,11 @@ class TaskAdapter :
 
         with(viewHolder) {
             setView(task)
+
+            if(position==(itemCount -1))
+                setLastMargin()
+
             setColorType(task.type, task.status)
-            binding.fabDelete.setOnClickListener { onDeleteItem?.invoke(task, itemView) }
             binding.fabEdit.setOnClickListener { onEditItem?.invoke(task) }
             binding.itemContainer.setOnClickListener { onInfoItem?.invoke(task) }
             binding.fabDone.setOnClickListener { onDoneItem?.invoke(task) }

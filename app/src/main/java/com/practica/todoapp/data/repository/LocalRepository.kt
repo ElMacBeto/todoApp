@@ -8,7 +8,7 @@ class LocalRepository {
 
     private val db = database.taskDao()
 
-    fun getAllTask() = db.getAll()
+    suspend fun getAllTask(date:String): List<TaskEntity> = db.getAll(date)
 
     suspend fun getById(id:Int):TaskEntity{
         return db.getById(id)

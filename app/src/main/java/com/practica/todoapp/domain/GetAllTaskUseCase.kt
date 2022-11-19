@@ -13,8 +13,11 @@ class GetAllTaskUseCase {
         DaggerRepositoryComponent.builder().build().inject(this)
     }
 
-    operator fun invoke()=
-         repository.getAllTask()
+    suspend operator fun invoke(date:String)=
+       repository.getAllTask(date)
+
+
+
 
 
 }

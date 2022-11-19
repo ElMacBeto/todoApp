@@ -10,6 +10,7 @@ import com.practica.todoapp.domain.AddOrUpdateTaskUseCase
 import com.practica.todoapp.domain.GetTaskByIdUseCase
 import com.practica.todoapp.domain.GetTasksListFromAPIUseCase
 import com.practica.todoapp.domain.SetNotificationUseCase
+import com.practica.todoapp.ui.util.ValidateDate
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ class MySplashViewModel : ViewModel() {
     val tasksList = MutableLiveData<List<TaskEntity>>()
     val message = MutableLiveData<String>()
     val finishActivity = MutableLiveData<Boolean>()
+    val validateDate = ValidateDate()
 
     init {
         DaggerUseCaseComponent.builder().build().inject(this)
@@ -53,10 +55,12 @@ class MySplashViewModel : ViewModel() {
             repository.deleteTaskTable()
 
             taskList.forEach { task ->
-                addOrUpdateTaskUseCase(task) { _, id ->
-                    task.id = id
-                    val successNotification = setNotificationUseCase(task)
-                    if (!successNotification) message.postValue("error to set notificacition")
+                if (validateDate(task.date, task.time)){
+                    addOrUpdateTaskUseCase(task) { _, id ->
+                        task.id = id
+                        val successNotification = setNotificationUseCase(task)
+                        if (!successNotification) message.postValue("error to set notificacition")
+                    }
                 }
             }
 

@@ -19,6 +19,7 @@
     <color name="bg_main">#ECECEC</color>
     <color name="myForeground">#B8B8B8</color>
     <color name="grey">#686868</color>
+    <color name="grey_transparent">#80686868</color>
 
     <!--items type    -->
     <color name="job">#363636</color>
