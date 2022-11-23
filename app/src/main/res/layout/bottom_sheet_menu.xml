@@ -133,7 +133,6 @@
                 android:textSize="18sp"
                 android:layout_marginVertical="10sp"
                 android:backgroundTint="@color/primary"
-
                 style="@style/Widget.MaterialComponents.Button.TextButton.Icon" />
 
         </LinearLayout>

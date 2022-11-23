@@ -1,7 +1,6 @@
 package com.practica.todoapp.ui.fragment.home
 
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var currentDateTv: TextView
     private lateinit var deletedTask: TaskEntity
     private lateinit var addBtn: Button
+    private lateinit var calendarView: CalendarView
     private var taskList = mutableListOf<TaskEntity>()
     private var offsetValue: Long = 0
     private var dateSelected = ""
@@ -102,14 +103,21 @@ class HomeFragment : Fragment() {
             val modalBottomSheet = ModalBottomSheet(null) { viewModel.getTaskList(dateSelected) }
             modalBottomSheet.show(parentFragmentManager, ModalBottomSheet.TAG)
         }
-        val currentOrientation = resources.configuration.orientation
-        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE){
-            addBtn?.setOnClickListener {
-                val modalBottomSheet = ModalBottomSheet(null) { viewModel.getTaskList(dateSelected) }
-                modalBottomSheet.show(parentFragmentManager, ModalBottomSheet.TAG)
-            }
+
+        addBtn.setOnClickListener {
+            val modalBottomSheet = ModalBottomSheet(null) { viewModel.getTaskList(dateSelected) }
+            modalBottomSheet.show(parentFragmentManager, ModalBottomSheet.TAG)
         }
 
+        calendarView?.setOnDateChangeListener { _, year, month, day ->
+            dateSelected = "$year-${month+1}-$day"
+
+            currentDateTv.text = dateSelected
+            calendarView.visibility = View.GONE
+            rightArrowBtn.visibility = View.VISIBLE
+            leftArrowBtn.visibility = View.VISIBLE
+            viewModel.getTaskList(dateSelected)
+        }
 
         binding.rvTask.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -212,12 +220,12 @@ class HomeFragment : Fragment() {
         currentDateTv = requireActivity().findViewById(R.id.current_date)
         leftArrowBtn = requireActivity().findViewById(R.id.left_arrow_btn)
         rightArrowBtn = requireActivity().findViewById(R.id.right_arrow_btn)
-        val currentOrientation = resources.configuration.orientation
-        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
-            addBtn = requireActivity().findViewById(R.id.add_btn)
+        calendarView = requireActivity().findViewById(R.id.calendar_view)
+        addBtn = requireActivity().findViewById(R.id.add_btn)
 
         requireActivity().findViewById<SearchView>(R.id.search)
             .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }

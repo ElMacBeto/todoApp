@@ -1,6 +1,7 @@
 package com.practica.todoapp.ui.fragment.home
 
 
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -39,6 +40,8 @@ class HomeViewModel : ViewModel() {
     val updateList = MutableLiveData<Boolean>()
 
     fun getTaskList(date:String) {
+
+        Log.i("date viewmodel", date)
         viewModelScope.launch {
             val currentTaskList = getAllTaskUseCase(date)
 
