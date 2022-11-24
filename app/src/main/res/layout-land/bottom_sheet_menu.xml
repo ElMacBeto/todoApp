@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="task"
+            type="com.practica.todoapp.data.datasource.database.entity.TaskEntity" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/standard_bottom_sheet"
+        tools:background="@color/job"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/task_name_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title"
+                app:errorEnabled="true"
+                style="@style/MyLayoutInputText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/task_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.name}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/task_description_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:layout_marginVertical="10sp"
+                app:errorEnabled="true"
+                style="@style/MyLayoutInputText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.description}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/task_type_ly"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Type"
+
+                    app:errorEnabled="true"
+                    style="@style/MyLayoutAutocompleteText">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/task_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:text="@{task.type}"
+                        app:boxStrokeColor="@color/white"
+                        android:background="@android:color/transparent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/task_date_ly"
+                    app:errorEnabled="true"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="FECHA"
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    app:startIconTint="@color/white"
+                    style="@style/MyLayoutInputText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/task_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="@drawable/foreground_item"
+                        android:focusable="false"
+                        android:text="@{task.date}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/task_time_ly"
+                    app:errorEnabled="true"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="HORA"
+                    app:startIconDrawable="@drawable/ic_time"
+                    app:startIconTint="@color/white"
+                    style="@style/MyLayoutInputText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/task_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foreground="@drawable/foreground_item"
+                        android:focusable="false"
+                        android:text="@{task.time}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/add_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_marginVertical="10sp"
+                android:backgroundTint="@color/primary"
+
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>

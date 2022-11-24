@@ -1,6 +1,9 @@
 package com.practica.todoapp.ui.fragment.home
 
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -44,6 +47,8 @@ class HomeFragment : Fragment() {
     private var taskList = mutableListOf<TaskEntity>()
     private var offsetValue: Long = 0
     private var dateSelected = ""
+    private lateinit var sharedPref: SharedPreferences
+
 
 
     override fun onCreateView(
@@ -57,6 +62,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPref = requireActivity().getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+        offsetValue = sharedPref.getLong(getString(R.string.saved_offset_day_key), offsetValue)
+
         setView()
         initAdapter()
         setObserver()
@@ -205,10 +216,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setTvDate(getData: Boolean = true) {
+
         val ldt: LocalDateTime = LocalDateTime.now().plusDays(offsetValue)
         val sdf = DateTimeFormatter.ofPattern("EEE, MMM d, ''yy")
         val sdfSearch = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         dateSelected = sdfSearch.format(ldt)
+
+        with(sharedPref!!.edit()) {
+            putLong(getString(R.string.saved_offset_day_key), offsetValue)
+            apply()
+        }
+
         val currentDate = sdf.format(ldt)
         Log.i("date", currentDate)
         currentDateTv.text = currentDate

@@ -8,5 +8,7 @@
     <string name="delete_title">Confirm delete</string>
 
     <string name="notification_message">You have a task %1$s at %2$s %3$s </string>
+    <string name="preference_file_key">my_sharepreference</string>
+    <string name="saved_offset_day_key">saved_offset_day_key</string>
 
 </resources>

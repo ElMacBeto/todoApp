@@ -123,8 +123,8 @@ class TaskAdapter :
         with(viewHolder) {
             setView(task)
 
-            if(position==(itemCount -1))
-                setLastMargin()
+//            if(position==(itemCount -1))
+//                setLastMargin()
 
             setColorType(task.type, task.status)
             binding.fabEdit.setOnClickListener { onEditItem?.invoke(task) }
